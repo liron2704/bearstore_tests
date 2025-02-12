@@ -24,3 +24,6 @@ class CartPage:
         WebDriverWait(self.driver, 5).until(EC.staleness_of(delete_button_list[0]))  # Wait until it's removed
         # Recursive call to remove the next product with the updated list
         self.remove_all_products()
+
+    def products_name_list(self):
+        return self.driver.find_elements(By.CSS_SELECTOR,'col-data')

@@ -15,3 +15,9 @@ class ProductPage:
 
     def add_to_cart(self):
         self.driver.find_element(By.CSS_SELECTOR, ".btn-block").click()
+
+    def get_price(self):
+        price_strip = self.driver.find_element(By.CSS_SELECTOR,'.pd-price > span').text.strip()
+        price_str = ''.join(char for char in price_strip if char.isdigit() or char == '.')
+        price = float(price_str)
+        return price

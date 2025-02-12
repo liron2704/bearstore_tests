@@ -133,8 +133,57 @@ class TestPageTransitions(TestCase):
         except Exception as e:
             write_test_result_to_xlsx(self.file_path, "J19", f"Fail: {str(e)}")
             raise
-        
-        
+
+    # Test 3
+    def test_correct_product_details(self):
+        category_name1 = read_data_from_xlsx(self.file_path, 'I2')
+        product_name1 = read_data_from_xlsx(self.file_path, 'I4')
+        quantity_product1 = read_data_from_xlsx(self.file_path, 'I6')
+
+        category_name2 = read_data_from_xlsx(self.file_path, 'I7')
+        product_name2 = read_data_from_xlsx(self.file_path, 'I9')
+        quantity_product2 = read_data_from_xlsx(self.file_path, 'I10')
+
+        category_name3 = read_data_from_xlsx(self.file_path, 'I11')
+        product_name3 = read_data_from_xlsx(self.file_path, 'I13')
+        quantity_product3 = read_data_from_xlsx(self.file_path, 'I14')
+
+        try:
+            self.home_page.click_on_category(category_name1)
+            self.category_page.click_on_product(product_name1)
+
+            product1_price = self.product_page.get_price()
+            product1_name = self.product_page.get_header_element()
+
+            self.product_page.change_quantity(quantity_product1)
+            self.product_page.add_to_cart()
+            self.home_page.return_to_home_page()
+            self.home_page.click_on_category(category_name2)
+            self.category_page.click_on_product(product_name2)
+
+            product2_price = self.product_page.get_price()
+            product2_name = self.product_page.get_header_element()
+
+            self.product_page.change_quantity(quantity_product2)
+            self.product_page.add_to_cart()
+            self.home_page.return_to_home_page()
+            self.home_page.click_on_category(category_name3)
+            self.category_page.click_on_product(product_name3)
+
+            product3_price = self.product_page.get_price()
+            product3_name = self.product_page.get_header_element()
+
+            self.product_page.change_quantity(quantity_product3)
+            self.product_page.add_to_cart()
+
+
+
+
+        except Exception as e:
+            write_test_result_to_xlsx(self.file_path, "I19", f"Fail: {str(e)}")
+            raise
+
+
 
     def tearDown(self):
         sleep(4)
