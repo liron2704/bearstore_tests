@@ -16,3 +16,6 @@ class HomePage:
             if category.text.strip() == category_name:
                 category.click()
                 return
+
+    def get_header_element(self):
+        return self.driver.find_element(By.CSS_SELECTOR,'.h2')
