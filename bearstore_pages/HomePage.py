@@ -10,12 +10,15 @@ class HomePage:
         return self.driver.find_elements(By.CSS_SELECTOR, ".artlist-homepage-categories a span")
 
 
-    def selected_category(self, category_name):
+    def click_on_category(self, category_name):
         """ Clicks on the category with the given name. """
         for category in self.categories_list():
             if category.text.strip() == category_name:
                 category.click()
                 return
+
+    def return_to_home_page(self):
+        self.driver.find_element(By.CSS_SELECTOR,'.brand').click()
 
     def get_header_element(self):
         return self.driver.find_element(By.CSS_SELECTOR,'.h2')

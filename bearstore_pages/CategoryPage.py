@@ -10,7 +10,7 @@ class CategoryPage:
         return self.driver.find_elements(By.CSS_SELECTOR, ".product-list-container > .artlist a span")
 
 
-    def selected_product(self, product_name):
+    def click_on_product(self, product_name):
         """ Clicks on the product with the given name. """
         for product in self.products_list():
             if product.text.strip() == product_name:
