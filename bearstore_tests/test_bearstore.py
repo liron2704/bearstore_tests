@@ -153,7 +153,7 @@ class TestPageTransitions(TestCase):
             self.category_page.click_on_product(product_name1)
 
             product1_price = self.product_page.get_price()
-            product1_name = self.product_page.get_header_element()
+            product1_name = self.product_page.get_header_element().text
 
             self.product_page.change_quantity(quantity_product1)
             self.product_page.add_to_cart()
@@ -162,7 +162,7 @@ class TestPageTransitions(TestCase):
             self.category_page.click_on_product(product_name2)
 
             product2_price = self.product_page.get_price()
-            product2_name = self.product_page.get_header_element()
+            product2_name = self.product_page.get_header_element().text
 
             self.product_page.change_quantity(quantity_product2)
             self.product_page.add_to_cart()
@@ -171,22 +171,73 @@ class TestPageTransitions(TestCase):
             self.category_page.click_on_product(product_name3)
 
             product3_price = self.product_page.get_price()
-            product3_name = self.product_page.get_header_element()
+            product3_name = self.product_page.get_header_element().text
 
             self.product_page.change_quantity(quantity_product3)
             self.product_page.add_to_cart()
 
+            product_names = [product1_name, product2_name, product3_name]
+            product_prices = [product1_price, product2_price, product3_price]
+            product_quantities = [int(quantity_product1), int(quantity_product2), int(quantity_product3)]
 
+            cart_page_names = self.cart_page.products_name_list_elements()
+            cart_page_prices = self.cart_page.price_list()
+            cart_page_quantities = self.cart_page.get_quantity_list_number()
 
+            for i in range(3):  # Loop through product indices
+                self.assertEqual(product_names[i], cart_page_names[2 - i].text)  # Reverse order for cart_page_names
+                self.assertEqual(product_prices[i], cart_page_prices[2 - i])
+                self.assertEqual(product_quantities[i], cart_page_quantities[2 - i])
+
+            write_test_result_to_xlsx(self.file_path, "I19", "Pass")
+            self.cart_page.remove_all_products()
 
         except Exception as e:
             write_test_result_to_xlsx(self.file_path, "I19", f"Fail: {str(e)}")
             raise
 
+    #Test 4
+    def test_delete_one_product(self):
+        category_name1 = read_data_from_xlsx(self.file_path, 'H2')
+        product_name1 = read_data_from_xlsx(self.file_path, 'H4')
+
+        category_name2 = read_data_from_xlsx(self.file_path, 'H7')
+        product_name2 = read_data_from_xlsx(self.file_path, 'H9')
+
+        try:
+            self.home_page.click_on_category(category_name1)
+            self.category_page.click_on_product(product_name1)
+
+            product1_price = self.product_page.get_price()
+            product1_name = self.product_page.get_header_element().text
+
+            self.product_page.add_to_cart()
+            self.home_page.return_to_home_page()
+            self.home_page.click_on_category(category_name2)
+            self.category_page.click_on_product(product_name2)
+            self.product_page.add_to_cart()
+
+            initial_count = len(self.cart_page.products_name_list_elements())
+            self.cart_page.remove_product_by_index(0)
+
+            # Wait for the length of the product list to decrease by one
+            WebDriverWait(self.driver, 10).until(
+                lambda driver: len(self.cart_page.products_name_list_elements()) == initial_count - 1
+            )
+            self.assertEqual(product1_name,self.cart_page.products_name_list_elements()[0].text)
+            self.assertEqual(product1_price,self.cart_page.price_list()[0])
+            self.assertEqual(1,self.cart_page.get_quantity_list_number()[0])
+
+            write_test_result_to_xlsx(self.file_path, "H19", "Pass")
+            self.cart_page.remove_all_products()
+
+        except Exception as e:
+            write_test_result_to_xlsx(self.file_path, "H19", f"Fail: {str(e)}")
+            raise
 
 
     def tearDown(self):
-        sleep(4)
+        sleep(3)
         self.driver.quit()
 
 
