@@ -4,7 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-class CartPage:
+class CartPopUp:
     def __init__(self, driver: WebDriver):
         self.driver = driver
 
@@ -50,3 +50,21 @@ class CartPage:
             price = ''.join(char for char in price_strip if char.isdigit() or char == '.')
             price_list.append(float(price))
         return price_list
+
+    def is_cart_visible(self):
+        """Helper function to check if the cart subtotal element is visible."""
+        try:
+            return WebDriverWait(self.driver, 2).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, ".offcanvas-cart-header"))
+            )
+        except:
+            return False
+
+    def go_to_cart_element(self):
+        return self.driver.find_element(By.CSS_SELECTOR,'.btn-success')
+
+    def get_total_amount_price(self):
+        price_strip = self.driver.find_element(By.CSS_SELECTOR, '.sub-total').text.strip()
+        price_str = ''.join(char for char in price_strip if char.isdigit() or char == '.')
+        price = float(price_str)
+        return price

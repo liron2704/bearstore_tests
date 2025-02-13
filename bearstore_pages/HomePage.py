@@ -22,3 +22,6 @@ class HomePage:
 
     def get_header_element(self):
         return self.driver.find_element(By.CSS_SELECTOR,'.h2')
+
+    def get_shopping_cart_element(self):
+        return self.driver.find_element(By.CSS_SELECTOR,'#shopbar-cart > a')
