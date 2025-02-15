@@ -12,7 +12,7 @@ class CartPopUp:
         return self.driver.find_elements(By.XPATH,"//div[@class='offcanvas-cart-item']//input[@name='item.EnteredQuantity']")
 
     def get_quantity_list_number(self):
-        """ Returns the total amount of products in the basket """
+        """ Returns the total amount of products in the cart """
         quantities = self.driver.find_elements(By.XPATH,"//div[@class='offcanvas-cart-item']//input[@name='item.EnteredQuantity']")
         quantity_list = []
         for quantity in quantities:

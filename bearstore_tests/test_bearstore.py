@@ -11,6 +11,7 @@ from bearstore_pages.ShoppingCartPage import ShoppingCartPage
 from bearstore_tests.data_from_xlsx import *
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import logging
 
 
 class TestPageTransitions(TestCase):
@@ -328,14 +329,83 @@ class TestPageTransitions(TestCase):
             self.cart_pop_up.go_to_cart_element().click()
             cart_total_price = self.shopping_cart_page.get_total_amount_price()
             self.assertEqual(cart_total_price, total_price)
-
-
             write_test_result_to_xlsx(self.file_path, "F19", "Pass")
+            logging.basicConfig(level=logging.INFO)
+            logging.info(f' product1 name: {product_name1}')
+            logging.info(f' product2 name: {product_name2}')
+            logging.info(f' product3 name: {product_name3}')
+            logging.info(f' product1 price: {product1_price}')
+            logging.info(f' product2 price: {product2_price}')
+            logging.info(f' product3 price: {product3_price}')
+            logging.info(f' product1 quantity: {quantity_product1}')
+            logging.info(f' product1 quantity: {quantity_product2}')
+            logging.info(f' product1 quantity: {quantity_product3}')
+
             self.cart_pop_up.remove_all_products()
 
         except Exception as e:
             write_test_result_to_xlsx(self.file_path, "F19", f"Fail: {str(e)}")
             raise
+
+    # Test 7
+    def test_cart_page_updates(self):
+        category_name1 = read_data_from_xlsx(self.file_path, 'E2')
+        product_name1 = read_data_from_xlsx(self.file_path, 'E4')
+        quantity_product1 = read_data_from_xlsx(self.file_path, 'E6')
+
+        category_name2 = read_data_from_xlsx(self.file_path, 'E7')
+        product_name2 = read_data_from_xlsx(self.file_path, 'E9')
+        quantity_product2 = read_data_from_xlsx(self.file_path, 'E10')
+        quantity_list = [quantity_product2, quantity_product1]
+
+        try:
+            self.home_page.click_on_category(category_name1)
+            self.category_page.click_on_product(product_name1)
+            self.product_page.add_to_cart()
+            self.home_page.return_to_home_page()
+            self.home_page.click_on_category(category_name2)
+            self.category_page.click_on_product(product_name2)
+            self.product_page.add_to_cart()
+            self.cart_pop_up.go_to_cart_element().click()
+
+            # Change quantities and wait for the updates
+            self.shopping_cart_page.change_quantities(quantity_list)
+
+            # Fetch updated unit prices from the cart
+            unit_price_list = self.shopping_cart_page.get_unit_price_list()[::-1]
+
+            # Calculate expected prices using the updated unit prices
+            expected_price1 = unit_price_list[0] * float(quantity_product1)
+            expected_price2 = unit_price_list[1] * float(quantity_product2)
+
+            # Verify the updated total prices
+            total_products_price_list = self.shopping_cart_page.get_total_products_price_list()[::-1]
+
+            self.assertAlmostEqual(total_products_price_list[0], expected_price1)
+            self.assertAlmostEqual(total_products_price_list[1], expected_price2)
+
+            # Verify the subtotal
+            sub_total = (float(self.shopping_cart_page.get_total_products_price_list()[0]) +
+                         float(self.shopping_cart_page.get_total_products_price_list()[1]))
+
+            self.assertEqual(self.shopping_cart_page.get_sub_total_price(), sub_total)
+
+            self.home_page.return_to_home_page()
+            self.home_page.get_shopping_cart_element().click()
+            self.assertEqual(self.cart_pop_up.get_total_amount_price(),sub_total)
+
+            write_test_result_to_xlsx(self.file_path, "E19", "Pass")
+
+            # Clean up: Remove all products from the cart
+            self.cart_pop_up.remove_all_products()
+
+        except Exception as e:
+            write_test_result_to_xlsx(self.file_path, "E19", f"Fail: {str(e)}")
+            raise
+
+    # Test 8
+    #def test_
+
 
     def tearDown(self):
         sleep(2)
