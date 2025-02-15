@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81a42af3-5d8a-477f-978d-274b37407835" name="Changes" comment="Test 3 + Test 4">
-      <change afterPath="$PROJECT_DIR$/bearstore_pages/ShoppingCartPage.py" afterDir="false" />
+    <list default="true" id="81a42af3-5d8a-477f-978d-274b37407835" name="Changes" comment="Test 7">
+      <change afterPath="$PROJECT_DIR$/bearstore_pages/CheckOutPage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bearstore_pages/OrderDetailsPage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bearstore_pages/RegisterPage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bearstore_pages/SignInPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bearstore_pages/CartPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/bearstore_pages/CartPopUp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bearstore_pages/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/bearstore_pages/HomePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bearstore_pages/CartPopUp.py" beforeDir="false" afterPath="$PROJECT_DIR$/bearstore_pages/CartPopUp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bearstore_pages/ShoppingCartPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/bearstore_pages/ShoppingCartPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bearstore_tests/test_bearstore.py" beforeDir="false" afterPath="$PROJECT_DIR$/bearstore_tests/test_bearstore.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +52,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for test_bearstore.TestBearStore.test_checkout_with_user.executor": "Run",
+    "Python tests.Python tests for test_bearstore.TestPageTransitions.test_cart_page_updates.executor": "Run",
     "Python tests.Python tests for test_bearstore.TestPageTransitions.test_cart_transition.executor": "Run",
     "Python tests.Python tests for test_bearstore.TestPageTransitions.test_correct_product_details.executor": "Run",
     "Python tests.Python tests for test_bearstore.TestPageTransitions.test_delete_one_product.executor": "Run",
@@ -57,16 +62,18 @@
     "Python tests.Python tests for test_bearstore.TestPageTransitions.test_total_cart_amount.executor": "Run",
     "Python tests.Python tests for test_page_transitions.TestPageTransitions.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/nachala/PycharmProjects/pythonProject/first_selenium"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nachala\PycharmProjects\selenium_project\bearstore_pages" />
       <recent name="C:\Users\nachala\PycharmProjects\selenium_project\bearstore_tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_bearstore.TestPageTransitions.test_cart_transition">
-    <configuration name="Python tests for test_bearstore.TestPageTransitions.test_cart_transition" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests for test_bearstore.TestBearStore.test_checkout_with_user">
+    <configuration name="Python tests for bearstore_tests.test_bearstore.TestBearStore.test_cart_page_updates" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="selenium_project" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -77,11 +84,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_bearstore.TestPageTransitions.test_cart_transition&quot;" />
+      <option name="_new_target" value="&quot;bearstore_tests.test_bearstore.TestBearStore.test_cart_page_updates&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_bearstore.TestPageTransitions.test_correct_product_details" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for bearstore_tests.test_bearstore.TestBearStore.test_cart_transition" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="selenium_project" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -92,11 +99,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_bearstore.TestPageTransitions.test_correct_product_details&quot;" />
+      <option name="_new_target" value="&quot;bearstore_tests.test_bearstore.TestBearStore.test_cart_transition&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_bearstore.TestPageTransitions.test_delete_one_product" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for bearstore_tests.test_bearstore.TestBearStore.test_delete_one_product" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="selenium_project" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -107,11 +114,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_bearstore.TestPageTransitions.test_delete_one_product&quot;" />
+      <option name="_new_target" value="&quot;bearstore_tests.test_bearstore.TestBearStore.test_delete_one_product&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_bearstore.TestPageTransitions.test_quantity_on_cart" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for bearstore_tests.test_bearstore.TestBearStore.test_total_cart_amount" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="selenium_project" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -122,11 +129,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_bearstore.TestPageTransitions.test_quantity_on_cart&quot;" />
+      <option name="_new_target" value="&quot;bearstore_tests.test_bearstore.TestBearStore.test_total_cart_amount&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_bearstore.TestPageTransitions.test_total_cart_amount" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_bearstore.TestBearStore.test_checkout_with_user" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="selenium_project" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -137,17 +144,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_bearstore.TestPageTransitions.test_total_cart_amount&quot;" />
+      <option name="_new_target" value="&quot;test_bearstore.TestBearStore.test_checkout_with_user&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_bearstore.TestPageTransitions.test_cart_transition" />
-        <item itemvalue="Python tests.Python tests for test_bearstore.TestPageTransitions.test_total_cart_amount" />
-        <item itemvalue="Python tests.Python tests for test_bearstore.TestPageTransitions.test_delete_one_product" />
-        <item itemvalue="Python tests.Python tests for test_bearstore.TestPageTransitions.test_correct_product_details" />
-        <item itemvalue="Python tests.Python tests for test_bearstore.TestPageTransitions.test_quantity_on_cart" />
+        <item itemvalue="Python tests.Python tests for test_bearstore.TestBearStore.test_checkout_with_user" />
+        <item itemvalue="Python tests.Python tests for bearstore_tests.test_bearstore.TestBearStore.test_cart_page_updates" />
+        <item itemvalue="Python tests.Python tests for bearstore_tests.test_bearstore.TestBearStore.test_total_cart_amount" />
+        <item itemvalue="Python tests.Python tests for bearstore_tests.test_bearstore.TestBearStore.test_cart_transition" />
+        <item itemvalue="Python tests.Python tests for bearstore_tests.test_bearstore.TestBearStore.test_delete_one_product" />
       </list>
     </recent_temporary>
   </component>
@@ -215,7 +222,23 @@
       <option name="project" value="LOCAL‎" />
       <updated>1739444419432</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL‎-00007" summary="Test 6 need to add prints">
+      <option name="closed" value="true" />
+      <created>1739464354013</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1739464354013</updated>
+    </task>
+    <task id="LOCAL‎-00008" summary="Test 7">
+      <option name="closed" value="true" />
+      <created>1739631403595</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1739631403596</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -225,6 +248,8 @@
     <MESSAGE value="Second Test" />
     <MESSAGE value="middle of test 3" />
     <MESSAGE value="Test 3 + Test 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test 3 + Test 4" />
+    <MESSAGE value="Test 6 need to add prints" />
+    <MESSAGE value="Test 7" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test 7" />
   </component>
 </project>

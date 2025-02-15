@@ -3,18 +3,23 @@ from selenium import webdriver
 from time import sleep
 
 from bearstore_pages.CartPopUp import CartPopUp
+from bearstore_pages.CheckOutPage import CheckOutPage
 from bearstore_pages.HomePage import HomePage
 from bearstore_pages.CategoryPage import CategoryPage
 from selenium.webdriver.common.by import By
+
+from bearstore_pages.OrderDetailsPage import OrderDetailsPage
 from bearstore_pages.ProductPage import ProductPage
+from bearstore_pages.RegisterPage import RegisterPage
 from bearstore_pages.ShoppingCartPage import ShoppingCartPage
+from bearstore_pages.SignInPage import SignIn
 from bearstore_tests.data_from_xlsx import *
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import logging
 
 
-class TestPageTransitions(TestCase):
+class TestBearStore(TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get("https://bearstore-testsite.smartbear.com/")
@@ -27,6 +32,10 @@ class TestPageTransitions(TestCase):
         self.product_page = ProductPage(self.driver)
         self.cart_pop_up = CartPopUp(self.driver)
         self.shopping_cart_page = ShoppingCartPage(self.driver)
+        self.sign_in_page = SignIn(self.driver)
+        self.register_page = RegisterPage(self.driver)
+        self.checkout_page = CheckOutPage(self.driver)
+        self.order_details_page = OrderDetailsPage(self.driver)
 
     # Test 1
     def test_page_transition(self):
@@ -404,7 +413,86 @@ class TestPageTransitions(TestCase):
             raise
 
     # Test 8
-    #def test_
+    def test_checkout_with_user(self):
+        # Read category, product names, and quantities from the Excel file.
+        category_name1 = read_data_from_xlsx(self.file_path, 'D2')
+        product_name1 = read_data_from_xlsx(self.file_path, 'D4')
+        category_name2 = read_data_from_xlsx(self.file_path, 'D7')
+        product_name2 = read_data_from_xlsx(self.file_path, 'D9')
+
+        # Register Data inputs
+        register_first_name = read_data_from_xlsx(self.file_path, 'K25')
+        register_last_name = read_data_from_xlsx(self.file_path, 'J25')
+        register_day = read_data_from_xlsx(self.file_path, 'I26')
+        register_month = read_data_from_xlsx(self.file_path, 'H26')
+        register_year = read_data_from_xlsx(self.file_path, 'G26')
+        register_email = read_data_from_xlsx(self.file_path, 'F25')
+        register_user_name = read_data_from_xlsx(self.file_path, 'E25')
+        register_password = read_data_from_xlsx(self.file_path, 'D25')
+
+        # Log in Data Inputs
+        user_name_log_in = read_data_from_xlsx(self.file_path, 'K15')
+        password_log_in = read_data_from_xlsx(self.file_path, 'K17')
+
+        # Is Account Already Created
+        is_account_created = read_data_from_xlsx(self.file_path,'B25')
+
+        # Order Confirmation order text
+        confirmation_message = read_data_from_xlsx(self.file_path,'L31')
+
+        # Empty Cart Pop-Up Header
+        empty_cart_header = read_data_from_xlsx(self.file_path,'L32')
+
+        try:
+            self.home_page.click_on_category(category_name1)
+            self.category_page.click_on_product(product_name1)
+            self.product_page.add_to_cart()
+            self.home_page.return_to_home_page()
+            self.home_page.click_on_category(category_name2)
+            self.category_page.click_on_product(product_name2)
+            self.product_page.add_to_cart()
+            self.cart_pop_up.get_checkout_button_element().click()
+
+            if is_account_created == 'Yes':
+                self.sign_in_page.enter_details(user_name_log_in, password_log_in)
+                self.sign_in_page.get_login_button_element().click()
+
+            else:
+                self.sign_in_page.register_button_element().click()
+                self.register_page.enter_details(register_first_name,register_last_name,register_day,
+                                                 register_month, register_year, register_email,
+                                                 register_user_name, register_password)
+
+                self.register_page.get_register_button_element().click()
+                self.register_page.get_continue_element().click()
+                write_test_result_to_xlsx(self.file_path, "B25", "Yes")
+
+            self.shopping_cart_page.get_checkout_button_element().click()
+            self.checkout_page.enter_billing_address(register_first_name,register_last_name)
+            self.checkout_page.next_button_billing_address_element().click()
+            self.checkout_page.ship_to_this_address_button_element().click()
+            self.checkout_page.next_button_shipping_method_element().click()
+            self.checkout_page.next_button_payment_method_element().click()
+            self.checkout_page.get_agreement_checkbox_element().click()
+            self.checkout_page.get_confirm_button_element().click()
+
+            self.assertEqual(confirmation_message.strip(),self.checkout_page.get_confirmation_header_element().text.strip())
+
+            order_number = self.checkout_page.get_order_number_element().text
+            self.checkout_page.get_order_details_button_element().click()
+
+            self.assertEqual(order_number,self.order_details_page.get_order_details_element().text)
+
+            self.home_page.get_shopping_cart_element().click()
+
+            self.assertEqual(empty_cart_header.strip(),self.cart_pop_up.get_empty_cart_header().text.strip())
+
+            write_test_result_to_xlsx(self.file_path, "D19", "Pass")
+
+
+        except Exception as e:
+            write_test_result_to_xlsx(self.file_path, "D19", f"Fail: {str(e)}")
+            raise
 
 
     def tearDown(self):

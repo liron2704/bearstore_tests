@@ -1,10 +1,8 @@
-from time import sleep
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
+
 
 class ShoppingCartPage:
     def __init__(self, driver: WebDriver):
@@ -60,6 +58,10 @@ class ShoppingCartPage:
             price = ''.join(char for char in price_strip if char.isdigit() or char == '.')
             price_list.append(float(price))
         return price_list
+
+    def get_checkout_button_element(self):
+        return self.driver.find_element(By.ID, 'checkout')
+
 
 
 

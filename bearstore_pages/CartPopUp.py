@@ -68,3 +68,9 @@ class CartPopUp:
         price_str = ''.join(char for char in price_strip if char.isdigit() or char == '.')
         price = float(price_str)
         return price
+
+    def get_checkout_button_element(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '.btn-clear')
+
+    def get_empty_cart_header(self):
+        return self.driver.find_element(By.CSS_SELECTOR,'.no-item-title')
