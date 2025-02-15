@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
+
 class HomePage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
@@ -25,3 +26,12 @@ class HomePage:
 
     def get_shopping_cart_element(self):
         return self.driver.find_element(By.CSS_SELECTOR,'#shopbar-cart > a')
+
+    def get_login_element(self):
+        return self.driver.find_element(By.CSS_SELECTOR,'#menubar-my-account>.dropdown > .menubar-link')
+
+    def get_account_name_element_when_user_logged_in(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "#menubar-my-account .dropdown a.menubar-link span")
+
+    def get_logout_element(self):
+        return self.driver.find_element(By.CSS_SELECTOR,'.fa-sign-out-alt')

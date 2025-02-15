@@ -494,6 +494,30 @@ class TestBearStore(TestCase):
             write_test_result_to_xlsx(self.file_path, "D19", f"Fail: {str(e)}")
             raise
 
+    # Test 9
+    def test_login_logout(self):
+        # Log in Data Inputs
+        user_name_log_in = read_data_from_xlsx(self.file_path, 'K15')
+        password_log_in = read_data_from_xlsx(self.file_path, 'K17')
+        login_button_header_when_user_not_logged_in = read_data_from_xlsx(self.file_path,'L33')
+
+
+        try:
+            self.home_page.get_login_element().click()
+            self.sign_in_page.enter_details(user_name_log_in,password_log_in)
+            self.sign_in_page.get_login_button_element().click()
+
+            self.assertEqual(user_name_log_in.strip().lower(),self.home_page.get_account_name_element_when_user_logged_in().text.strip().lower())
+            self.home_page.get_account_name_element_when_user_logged_in().click()
+            self.home_page.get_logout_element().click()
+            self.assertEqual(login_button_header_when_user_not_logged_in.lower(),self.home_page.get_login_element().text.lower())
+
+            write_test_result_to_xlsx(self.file_path, "C19", "Pass")
+
+        except Exception as e:
+            write_test_result_to_xlsx(self.file_path, "C19", f"Fail: {str(e)}")
+            raise
+
 
     def tearDown(self):
         sleep(2)
